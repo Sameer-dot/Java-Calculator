@@ -23,6 +23,8 @@ public class Calculator extends JFrame implements ActionListener {
     JTextField tf,textField;
     Double num1,num2,result;
     String operator;
+    Boolean flag = false;
+    Boolean flamg = true;
 
 
     Calculator(){
@@ -47,7 +49,7 @@ public class Calculator extends JFrame implements ActionListener {
         textField.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,14));
         this.add(textField);
 
-        tf = new JTextField();
+        tf = new JTextField("0");
         tf.setBounds(0,40,385,130);
         tf.setBackground(new Color(0xE6E6E6));
         tf.setBorder(null);
@@ -145,7 +147,6 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
 
-
     public static void main(String[] args){
         Calculator cal = new Calculator();
     }
@@ -155,48 +156,112 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     public void setTextField(String val){
+        if(flamg){
+            tf.setText("");
+        }
         tf.setText(tf.getText().concat(val));
+        flamg=false;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn[0]){
-            String per = "%";
+            num1 = Double.parseDouble(tf.getText());
+            result = num1/100;
+            tf.setText(String.valueOf(result));
+            textField.setText("");
         }
         else if (e.getSource() == btn[1]){
-            System.out.print("Button dab gya");
+            num1 = Double.parseDouble(tf.getText());
+            result = Math.sqrt(num1);
+            tf.setText(String.valueOf(result));
+            String val = "sqrt("+String.valueOf(num1)+")";
+            textField.setText(val);
+            flag=true;
         }
         else if (e.getSource() == btn[2]){
-            System.out.print("Button dab gya");
+            num1 = Double.parseDouble(tf.getText());
+            result = num1 * num1;
+            tf.setText(String.valueOf(result));
+            String val = "sqr("+String.valueOf(num1)+")";
+            textField.setText(val);
+            flag=true;
         }
         else if (e.getSource() == btn[3]){
-            System.out.print("Button dab gya");
-        }
-        else if (e.getSource() == btn[4]){
-            System.out.print("Button dab gya");
-        }
-        else if (e.getSource() == btn[5]){
-            System.out.print("Button dab gya");
-        }
-        else if (e.getSource() == btn[6]){
-            System.out.print("Button dab gya");
-        }
-        else if (e.getSource() == btn[7]){
             num1 = Double.parseDouble(tf.getText());
-            operator = "÷";
-            String val = String.valueOf(btn[7].getText());
-            setHistoryField(val);
-            tf.setText("");
+            result = 1/num1;
+            tf.setText(String.valueOf(result));
+            String val = "1/("+String.valueOf(num1)+")";
+            textField.setText(val);
+            flag=true;
         }
+        //CE
+        else if (e.getSource() == btn[4]){
+            tf.setText("0");
+            flamg=true;
+        }
+        //C
+        else if (e.getSource() == btn[5]){
+            tf.setText("0");
+            textField.setText("");
+            flamg=true;
+        }
+        //esc
+        else if (e.getSource() == btn[6]){
+            String val = tf.getText();
+            if(val.length()-1 == 0){
+                tf.setText("0");
+                flamg = true;
+            }
+            else {
+                tf.setText("");
+                for (int i = 0; i < val.length() - 1; i++) {
+                    tf.setText(tf.getText() + val.charAt(i));
+                }
+            }
+        }
+        //Divide
+        else if (e.getSource() == btn[7]){
+            try {
+                num1 = Double.parseDouble(tf.getText());
+                operator = "÷";
+                String val = String.valueOf(btn[7].getText());
+                setHistoryField(val);
+                tf.setText("");
+            }catch(ArithmeticException excp){
+                tf.setText("Cannot Divide by 0");
+            }
+        }
+        //7
         else if (e.getSource() == btn[8]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[8].getText());
             setTextField(val);
         }
+        //8
         else if (e.getSource() == btn[9]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[9].getText());
             setTextField(val);
         }
+        //9
         else if (e.getSource() == btn[10]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[10].getText());
             setTextField(val);
         }
@@ -208,15 +273,36 @@ public class Calculator extends JFrame implements ActionListener {
             setHistoryField(val);
             tf.setText("");
         }
+        //4
         else if (e.getSource() == btn[12]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[12].getText());
             setTextField(val);
         }
+        //5
         else if (e.getSource() == btn[13]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[13].getText());
             setTextField(val);
         }
+        //6
         else if (e.getSource() == btn[14]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[14].getText());
             setTextField(val);
         }
@@ -228,15 +314,36 @@ public class Calculator extends JFrame implements ActionListener {
             setHistoryField(val);
             tf.setText("");
         }
+        //1
         else if (e.getSource() == btn[16]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[16].getText());
             setTextField(val);
         }
+        //2
         else if (e.getSource() == btn[17]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[17].getText());
             setTextField(val);
         }
+        //3
         else if (e.getSource() == btn[18]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[18].getText());
             setTextField(val);
         }
@@ -248,17 +355,29 @@ public class Calculator extends JFrame implements ActionListener {
             setHistoryField(val);
             tf.setText("");
         }
+        //+/-
         else if (e.getSource() == btn[20]){
-            String val = String.valueOf(btn[20].getText());
-            setTextField(val);
+            double val = Double.parseDouble(tf.getText());
+            val *= -1;
+            tf.setText(String.valueOf(val));
         }
+        //0
         else if (e.getSource() == btn[21]){
+            if(flag){
+                tf.setText("");
+                textField.setText("");
+                num1=0.0;
+                flag=false;
+            }
             String val = String.valueOf(btn[21].getText());
             setTextField(val);
         }
+        //dot
         else if (e.getSource() == btn[22]){
-            String val = String.valueOf(btn[22].getText());
-            setTextField(val);
+            String val = tf.getText();
+            if(! val.contains(".")){
+                setTextField(String.valueOf(btn[22].getText()));
+            }
         }
         else if (e.getSource() == btn[23]){
             num2 = Double.parseDouble(tf.getText());
