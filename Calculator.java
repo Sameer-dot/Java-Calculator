@@ -20,7 +20,10 @@ class MyBtn extends JButton{
 
 public class Calculator extends JFrame implements ActionListener {
     MyBtn[] btn = new MyBtn[24];
-    JTextField tf;
+    JTextField tf,textField;
+    Double num1,num2,result;
+    String operator;
+
 
     Calculator(){
         this.setTitle("Calculator");
@@ -35,12 +38,14 @@ public class Calculator extends JFrame implements ActionListener {
         //panel.setBackground(Color.GRAY);
         //this.add(panel);
 
-        JTextField tfield = new JTextField();
-        tfield.setBounds(0,0,390,40);
-        tfield.setBackground(Color.black);
-        tfield.setBorder(null);
-        tfield.setEditable(false);
-        this.add(tfield);
+        textField = new JTextField();
+        textField.setBounds(0,0,385,40);
+        textField.setBackground(new Color(0xE6E6E6));
+        textField.setBorder(null);
+        textField.setEditable(false);
+        textField.setHorizontalAlignment(JTextField.RIGHT);
+        textField.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,14));
+        this.add(textField);
 
         tf = new JTextField();
         tf.setBounds(0,40,385,130);
@@ -48,7 +53,7 @@ public class Calculator extends JFrame implements ActionListener {
         tf.setBorder(null);
         tf.setEditable(false);
         tf.setHorizontalAlignment(JTextField.RIGHT);
-        tf.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
+        tf.setFont(new Font(Font.SANS_SERIF,Font.BOLD,36));
         this.add(tf);
 
 
@@ -135,7 +140,6 @@ public class Calculator extends JFrame implements ActionListener {
         }
 
         this.add(panel2);
-
         this.revalidate();
         this.repaint();
     }
@@ -144,11 +148,14 @@ public class Calculator extends JFrame implements ActionListener {
 
     public static void main(String[] args){
         Calculator cal = new Calculator();
+    }
 
+    public void setHistoryField(String val){
+        textField.setText(tf.getText().concat(val));
     }
 
     public void setTextField(String val){
-        tf.setText(val);
+        tf.setText(tf.getText().concat(val));
     }
 
     @Override
@@ -175,55 +182,105 @@ public class Calculator extends JFrame implements ActionListener {
             System.out.print("Button dab gya");
         }
         else if (e.getSource() == btn[7]){
-            System.out.print("Button dab gya");
+            num1 = Double.parseDouble(tf.getText());
+            operator = "÷";
+            String val = String.valueOf(btn[7].getText());
+            setHistoryField(val);
+            tf.setText("");
         }
         else if (e.getSource() == btn[8]){
-            tf.setText(tf.getText().concat(String.valueOf(btn[8].getText())));
+            String val = String.valueOf(btn[8].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[9]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[9].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[10]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[10].getText());
+            setTextField(val);
         }
+        //multiply
         else if (e.getSource() == btn[11]){
-            System.out.print("Button dab gya");
+            num1 = Double.parseDouble(tf.getText());
+            operator = "x";
+            String val = String.valueOf(btn[11].getText());
+            setHistoryField(val);
+            tf.setText("");
         }
         else if (e.getSource() == btn[12]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[12].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[13]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[13].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[14]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[14].getText());
+            setTextField(val);
         }
+        //subtract
         else if (e.getSource() == btn[15]){
-            System.out.print("Button dab gya");
+            num1 = Double.parseDouble(tf.getText());
+            operator = "-";
+            String val = String.valueOf(btn[15].getText());
+            setHistoryField(val);
+            tf.setText("");
         }
         else if (e.getSource() == btn[16]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[16].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[17]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[17].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[18]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[18].getText());
+            setTextField(val);
         }
+        //plus
         else if (e.getSource() == btn[19]){
-            System.out.print("Button dab gya");
+            num1 = Double.parseDouble(tf.getText());
+            operator = "+";
+            String val = String.valueOf(btn[19].getText());
+            setHistoryField(val);
+            tf.setText("");
         }
         else if (e.getSource() == btn[20]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[20].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[21]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[21].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[22]){
-            System.out.print("Button dab gya");
+            String val = String.valueOf(btn[22].getText());
+            setTextField(val);
         }
         else if (e.getSource() == btn[23]){
-            System.out.print("Button dab gya");
+            num2 = Double.parseDouble(tf.getText());
+            String val = String.valueOf(num1) + " "+ String.valueOf(operator) + " " +String.valueOf(num2) + " =";
+            textField.setText(val);
+            switch (operator){
+                case "+":
+                    result = num1+num2;
+                    break;
+                case "-":
+                    result = num1-num2;
+                    break;
+                case "x":
+                    result = num1*num2;
+                    break;
+                case "÷":
+                    result = num1/num2;
+                    break;
+            }
+            tf.setText(String.valueOf(result));
+            num1=result;
+
         }
     }
 }
